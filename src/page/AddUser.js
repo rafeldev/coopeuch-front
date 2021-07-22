@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { addUserAction } from '../services/index';
 
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AddUser = ({ onClose, setShowAddModal }) => {
   const classes = useStyles();
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const [addUser, setAddUser] = useState({
