@@ -20,6 +20,13 @@
       "contact": "9484785787",
       "address": "France",
       "id": 3
+    },
+    {
+      "name": "Rafael alvarez",
+      "email": "rafaAlvarez@gmail.com",
+      "contact": "2131241",
+      "address": "CO",
+      "id": 4
     }
   ]
 }
