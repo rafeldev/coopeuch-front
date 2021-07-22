@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,10 +7,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 /* Redux */
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUsers } from '../redux/actions';
+import { deleteUser, loadUsers } from '../redux/actions';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -50,14 +52,37 @@ const useStyles = makeStyles({
   },
 });
 
+const useStylesButton = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 const Home = () => {
+
+  /* Estilos de material UI */
   const classes = useStyles();
+  const buttonStyles = useStylesButton()
+
+  /* Conexion con redux */
   const dispatch = useDispatch();
+  const { users } = useSelector(state => state.data);
 
+  /*  */
   useEffect(() => {
-    dispatch(loadUsers())
-  }, [])
+    dispatch(loadUsers());
+  }, []);
 
+  const handleDeleteUser = (id) => {
+    if(window.confirm('estas seguro que deseas eliminar este usuario?')){
+      dispatch(deleteUser(id))
+    }
+  }
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -70,22 +95,33 @@ const Home = () => {
             <StyledTableCell align="center">Acciones</StyledTableCell>
           </TableRow>
         </TableHead>
-        {/* <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+        <TableBody>
+          {users && users.map((user) => (
+            <StyledTableRow key={user.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {user.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="center">{user.email}</StyledTableCell>
+              <StyledTableCell align="center">{user.contact}</StyledTableCell>
+              <StyledTableCell align="center">{user.address}</StyledTableCell>
+              <StyledTableCell align="center">
+                <div className={buttonStyles.root}>
+                  <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                    <Button 
+                      style={{marginRight: '10px'}} 
+                      color="secondary"
+                      onClick={() => handleDeleteUser(user.id)}
+                    >Eliminar</Button>
+                    <Button color="primary">Editar</Button>
+                  </ButtonGroup>
+                </div>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
-        </TableBody> */}
+        </TableBody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

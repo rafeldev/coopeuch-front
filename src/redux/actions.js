@@ -1,10 +1,14 @@
-import { GET_USERS } from './actionType';
+import { GET_USERS, DELETE_USER } from './actionType';
 import axios from 'axios'
 
 
 export const getUsers = (users) => ({
   type: GET_USERS,
   payload: users,
+})
+
+export const userDelete = () => ({
+  type: DELETE_USER
 })
 
 export const loadUsers = () => {
@@ -15,3 +19,13 @@ export const loadUsers = () => {
   }
 }
 
+export const deleteUser = (id) => {
+  return function(dispatch) {
+    axios.delete(`${process.env.REACT_APP_API}/${id}`)
+    .then((res) => {
+      dispatch(userDelete())
+      dispatch(loadUsers())
+    })
+    .catch((error) => console.log(error))
+  }
+}
