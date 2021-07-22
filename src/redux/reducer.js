@@ -1,4 +1,4 @@
-import { GET_USERS, DELETE_USER } from "./actionType";
+import { GET_USERS, DELETE_USER, ADD_USER } from "./actionType";
 
 
 const initialState = {
@@ -18,10 +18,7 @@ const usersReducer = (state = initialState, action) => {
         loading: false
       }
     case DELETE_USER:
-      return {
-        ...state,
-        loading: false
-      }
+    case ADD_USER:
     default:
       return state
   }
