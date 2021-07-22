@@ -1,0 +1,32 @@
+{
+  "user": [
+    {
+      "name": "Adam Marcus",
+      "address": "UK",
+      "email": "adam123@gmail.com",
+      "contact": "83673677367635",
+      "id": 1
+    },
+    {
+      "name": "Tommy",
+      "address": "Japan",
+      "email": "tom@gmail.com",
+      "contact": "83786646476",
+      "id": 2
+    },
+    {
+      "name": "James Bond",
+      "email": "james@gmail.com",
+      "contact": "9484785787",
+      "address": "France",
+      "id": 3
+    },
+    {
+      "name": "Larry",
+      "email": "larrry@gmail.com",
+      "contact": "347846746",
+      "address": "UK",
+      "id": 4
+    }
+  ]
+}
