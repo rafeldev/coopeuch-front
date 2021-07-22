@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { addUserAction } from '../redux/actions';
+import { useHistory, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSingleUser, updateUser } from '../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,9 +28,9 @@ const EditUser = () => {
     address: "",
   });
   const [error, setError] = useState("");
-
+  const { id } = useParams()
   const { name, email, contact, address } = addUser;
-  
+  const { user } = useSelector(state => state.data)
   const handleInputChange = (e) => {
     const {name, value} = e.target
     setAddUser({...addUser, [name]: value })
@@ -40,11 +40,21 @@ const EditUser = () => {
     if(!name || !address || !contact || !email){
       setError("Porfavor llena todos los inputs")
     } else {
-      dispatch(addUserAction(addUser))
+      dispatch(updateUser(addUser, id))
       history.push("/")
       setError("");
     }
   } 
+
+  useEffect(() => {
+    dispatch(getSingleUser(id))
+  }, [])
+
+  useEffect(() => {
+    if(user){
+      setAddUser({...user})
+    }
+  }, [user])
   
   return (
     <div>
@@ -55,7 +65,7 @@ const EditUser = () => {
           id="name" 
           name="name" 
           label="Nombre" 
-          value={name} 
+          value={name || ""} 
           type="text"
           onChange={handleInputChange}
         />
@@ -64,7 +74,7 @@ const EditUser = () => {
           id="email" 
           name="email" 
           label="Correo electronico" 
-          value={email} 
+          value={email || ""} 
           type="email"
           onChange={handleInputChange}
         />
@@ -73,7 +83,7 @@ const EditUser = () => {
           id="contact" 
           name="contact" 
           label="Contact" 
-          value={contact} 
+          value={contact || ""} 
           type="text"
           onChange={handleInputChange}
         />
@@ -82,7 +92,7 @@ const EditUser = () => {
           id="address" 
           name="address" 
           label="Dirección" 
-          value={address} 
+          value={address || ""} 
           type="text"
           onChange={handleInputChange}
         />

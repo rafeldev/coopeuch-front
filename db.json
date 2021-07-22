@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "name": "Adam Marcus",
+      "name": "Adam Marcus Antonio",
       "address": "UK",
       "email": "adam123@gmail.com",
       "contact": "83673677367635",
@@ -20,13 +20,6 @@
       "contact": "9484785787",
       "address": "France",
       "id": 3
-    },
-    {
-      "name": "prueba1",
-      "email": "prueba@gmail.com",
-      "contact": "contacto1",
-      "address": "blabla",
-      "id": 4
     }
   ]
 }
