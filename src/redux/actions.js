@@ -1,4 +1,4 @@
-import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_SINGLE_TASK, UPPDATE_TASK } from './actionType';
+import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_SINGLE_TASK, UPPDATE_TASK, OPEN_TASK } from './actionType';
 
 export const getTasks = (users) => ({
   type: GET_TASKS,
@@ -22,3 +22,7 @@ export const getTask = (user) => ({
   payload: user
 })
 
+export const openTask = (id) => ({
+  type: OPEN_TASK,
+  payload: {id}
+})

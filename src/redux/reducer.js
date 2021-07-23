@@ -1,4 +1,4 @@
-import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_SINGLE_TASK, UPPDATE_TASK } from "./actionType";
+import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_SINGLE_TASK, UPPDATE_TASK, OPEN_TASK } from "./actionType";
 
 
 const initialState = {
@@ -17,12 +17,25 @@ const tasksReducer = (state = initialState, action) => {
         tasks: payload,
         loading: false
       }
+    case OPEN_TASK: {
+      let newArray = state.tasks.map((task) => { 
+        if(task.id == payload.id){
+          task.open = !task.open
+        }
+        return task
+      })
+      return {
+        ...state,
+        tasks: newArray
+      }
+    }
     case DELETE_TASK:
     case ADD_TASK:
     case UPPDATE_TASK:
       return {
         ...state,
-        loading: false
+        loading: false,
+
       }
     case GET_SINGLE_TASK: 
       return {

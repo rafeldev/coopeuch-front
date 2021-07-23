@@ -22,6 +22,7 @@ import '../styles/Home.css'
 /* Redux */
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTask, loadTasks } from '../services';
+import { openTask } from '../redux/actions'
 
 /* Components */
 import EditTask from './EditTask';
@@ -44,8 +45,10 @@ const useStylesList = makeStyles((theme) => ({
   root: {
     margin: '0 auto',
     width: '50%',
-    backgroundColor: 'theme.palette.background.paper',
-    boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.05);'
+    backgroundColor: 'white',
+    boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.05)',
+    borderRadius: '4px',
+    padding: '5px 0',
   },
   selected: {
     color: 'red',
@@ -70,6 +73,7 @@ const Home = () => {
   /* Conexion con redux */
   const dispatch = useDispatch();
   const { tasks } = useSelector(state => state.data);
+  console.log(tasks)
 
   /* Dispara la accion de cargar los usuarios al cargar el Home */
   useEffect(() => {
@@ -91,8 +95,9 @@ const Home = () => {
   };
 
   const handleClick = (task) => (
-    console.log(task.open = !task.open)
+    dispatch(openTask(task.id))
   );
+
   return (
     <div>
       <div className={buttonStyles.root}>
@@ -114,7 +119,7 @@ const Home = () => {
         {
           tasks && tasks.map((task) => {
             return <>
-              <ListItem button onClick={(task) => handleClick(task)}>
+              <ListItem button onClick={() => handleClick(task)}>
                 <ListItemIcon>
                   <NoteIcon />
                 </ListItemIcon>

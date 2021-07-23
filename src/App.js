@@ -1,4 +1,3 @@
-import './App.css';
 import { Switch, Route } from 'react-router-dom'
 import Home from './page/Home';
 import EditTask from './page/EditTask';

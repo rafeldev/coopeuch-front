@@ -41,6 +41,7 @@ const AddTask = ({ onClose, setShowAddModal }) => {
     if (!name || !description) {
       setError("Este campo es obligatorio");
     } else {
+      addUser.open = false
       dispatch(addTaskAction(addUser));
       onClose()
       window.location.reload()
