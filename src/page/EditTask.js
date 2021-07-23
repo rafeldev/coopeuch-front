@@ -29,7 +29,7 @@ const EditTask = ({ onClose }) => {
     name: "",
     description: "",
   });
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
 
   const { id } = useParams();
   const { name, description } = addUser;
@@ -54,6 +54,7 @@ const EditTask = ({ onClose }) => {
 
   useEffect(() => {
     dispatch(getSingleTask(id));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -62,7 +62,6 @@ const useStylesList = makeStyles((theme) => ({
 const Home = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [open, setOpen] = React.useState(false);
 
   const history = useHistory()
 
@@ -73,11 +72,11 @@ const Home = () => {
   /* Conexion con redux */
   const dispatch = useDispatch();
   const { tasks } = useSelector(state => state.data);
-  console.log(tasks)
 
   /* Dispara la accion de cargar los usuarios al cargar el Home */
   useEffect(() => {
     dispatch(loadTasks());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* Esta funcion valida si estas seguro de que seas borrar un usuario y realiza el dispatch */
@@ -125,13 +124,13 @@ const Home = () => {
                 </ListItemIcon>
                 <ListItemText >{task.name}</ListItemText>
                 <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete">
-                    <DeleteIcon onClick={() => handleDeleteUser(task.id)} />
+                  <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteUser(task.id)}>
+                    <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
                 <ListItemSecondaryAction style={{marginRight: '60px'}}>
-                  <IconButton edge="end" aria-label="delete">
-                    <EditIcon onClick={() => history.push(`/editTask/${task.id}`)} />
+                  <IconButton edge="end" aria-label="delete" onClick={() => history.push(`/editTask/${task.id}`)}>
+                    <EditIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>

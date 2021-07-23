@@ -19,6 +19,7 @@ const tasksReducer = (state = initialState, action) => {
       }
     case OPEN_TASK: {
       let newArray = state.tasks.map((task) => { 
+        // eslint-disable-next-line eqeqeq
         if(task.id == payload.id){
           task.open = !task.open
         }
