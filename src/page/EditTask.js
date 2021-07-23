@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { addUserAction } from '../services/index';
+import { useHistory, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSingleTask, updateTask } from '../services';
+
+/* CSS */
+import '../styles/EditUser.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,91 +20,71 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddUser = ({ onClose, setShowAddModal }) => {
+const EditTask = ({ onClose }) => {
   const classes = useStyles();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [addUser, setAddUser] = useState({
     name: "",
-    email: "",
-    contact: "",
-    address: "",
+    description: "",
   });
   const [error, setError] = useState("");
 
-  const { name, email, contact, address } = addUser;
+  const { id } = useParams();
+  const { name, description } = addUser;
+  const { task } = useSelector(state => state.data);
 
-  /* Funcion que escucha los cambios del input */
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAddUser({ ...addUser, [name]: value });
   };
 
-  /* Funcion que envia el formulario y valida si estan vacios */
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !address || !contact || !email) {
-      setError("Este campo es obligatorio");
+    if (!name || !description) {
+      setError("Porfavor llena todos los inputs");
     } else {
-      dispatch(addUserAction(addUser));
-      onClose()
-      window.location.reload()
+      dispatch(updateTask(addUser, id));
+      history.push("/");
       setError("");
     }
   };
 
+  useEffect(() => {
+    dispatch(getSingleTask(id));
+  }, []);
+
+  useEffect(() => {
+    if (task) {
+      setAddUser({ ...task });
+    }
+  }, [task]);
+
+
+
   return ReactDOM.createPortal(
-    <div className="Background">
-      <div className="ModalWrapper">
-        <h2>Añadir usuario</h2>
-        {/* {error && <h3 style={{color: "red"}}>{error}</h3>} */}
+    <div className='Background'>
+      <div className='ModalWrapper' onClose={onClose}>
+        <h2>Editar Tarea</h2>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField
-            required
             id="name"
             name="name"
             label="Nombre"
-            value={name}
+            value={name || ""}
             type="text"
             onChange={handleInputChange}
-            error={error}
-            helperText={error}
           />
           <br />
           <TextField
-            required
-            id="email"
-            name="email"
+            id="description"
+            name="description"
             label="Correo electronico"
-            value={email}
-            type="email"
-            onChange={handleInputChange}
-            error={error}
-            helperText={error}
-          />
-          <br />
-          <TextField
-            required
-            id="contact"
-            name="contact"
-            label="Contact"
-            value={contact}
+            value={description || ""}
             type="text"
             onChange={handleInputChange}
-            error={error}
-            helperText={error}
-          />
-          <br />
-          <TextField
-            required
-            id="address"
-            name="address"
-            label="Dirección"
-            value={address}
-            type="text"
-            onChange={handleInputChange}
-            error={error}
-            helperText={error}
           />
           <br />
           <div className="Button__Container">
@@ -111,13 +94,13 @@ const AddUser = ({ onClose, setShowAddModal }) => {
               variant="contained"
               type="submit"
             >
-              Añadir
+              Actualizar
             </Button>
             <Button
               style={{ width: "100%" }}
               color="secondary"
               variant="contained"
-              onClick={onClose}
+              onClick={() => history.push('/')}
             >
               Cancelar
             </Button>
@@ -129,4 +112,4 @@ const AddUser = ({ onClose, setShowAddModal }) => {
   );
 };
 
-export default AddUser;
+export default EditTask;

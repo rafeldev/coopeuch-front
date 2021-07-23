@@ -1,53 +1,53 @@
 import axios from 'axios'
-import { getUser, getUsers, userAdded, userDelete, userUpdated } from '../redux/actions';
+import { getTask, getTasks, taskAdded, taskDelete, taskUpdated } from '../redux/actions';
 
 
-export const loadUsers = () => {
+export const loadTasks = () => {
   return function(dispatch) {
     axios.get(`${process.env.REACT_APP_API}`)
-    .then((res) => dispatch(getUsers(res.data)))
+    .then((res) => dispatch(getTasks(res.data)))
     .catch((error) => console.log(error))
   }
 }
 
-export const deleteUser = (id) => {
+export const deleteTask = (id) => {
   return function(dispatch) {
     axios.delete(`${process.env.REACT_APP_API}/${id}`)
     .then((res) => {
-      dispatch(userDelete())
-      dispatch(loadUsers())
+      dispatch(taskDelete())
+      dispatch(loadTasks())
     })
     .catch((error) => console.log(error))
   }
 }
 
 
-export const addUserAction = (user) => {
+export const addTaskAction = (user) => {
   return function(dispatch) {
     axios.post(`${process.env.REACT_APP_API}`, user)
     .then((res) => {
-      dispatch(userAdded())
+      dispatch(taskAdded())
       // dispatch(loadUsers())
     })
     .catch((error) => console.log(error))
   }
 }
 
-export const getSingleUser = (id) => {
+export const getSingleTask = (id) => {
   return function(dispatch) {
     axios.get(`${process.env.REACT_APP_API}/${id}`)
     .then((res) => {
-      dispatch(getUser(res.data))
+      dispatch(getTask(res.data))
     })
     .catch((error) => console.log(error))
   }
 }
 
-export const updateUser = (user, id) => {
+export const updateTask = (user, id) => {
   return function(dispatch) {
     axios.put(`${process.env.REACT_APP_API}/${id}`, user)
     .then((res) => {
-      dispatch(userUpdated())
+      dispatch(taskUpdated())
     })
     .catch((error) => console.log(error))
   }

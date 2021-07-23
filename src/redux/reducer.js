@@ -1,33 +1,33 @@
-import { GET_USERS, DELETE_USER, ADD_USER, GET_SINGLE_USER, UPPDATE_USER } from "./actionType";
+import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_SINGLE_TASK, UPPDATE_TASK } from "./actionType";
 
 
 const initialState = {
-  users: [],
-  user: {},
+  tasks: [],
+  task: {},
   loading: true
 }
 
-const usersReducer = (state = initialState, action) => {
+const tasksReducer = (state = initialState, action) => {
   const { payload, type } = action
 
   switch(type){
-    case GET_USERS: 
+    case GET_TASKS: 
       return { 
         ...state,
-        users: payload,
+        tasks: payload,
         loading: false
       }
-    case DELETE_USER:
-    case ADD_USER:
-    case UPPDATE_USER:
+    case DELETE_TASK:
+    case ADD_TASK:
+    case UPPDATE_TASK:
       return {
         ...state,
         loading: false
       }
-    case GET_SINGLE_USER: 
+    case GET_SINGLE_TASK: 
       return {
         ...state,
-        user: payload,
+        task: payload,
         loading: false
       }
     default:
@@ -35,4 +35,4 @@ const usersReducer = (state = initialState, action) => {
   }
 }
 
-export default usersReducer;
+export default tasksReducer;

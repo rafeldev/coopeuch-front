@@ -1,0 +1,9 @@
+.MuiListItem-container:hover {
+  background: #31409fc4;
+  color: white;
+}
+
+.MuiIconButton-root:hover {
+  background-color: rgba(49, 64, 159, 0.50) !important;
+  color: white !important;
+}

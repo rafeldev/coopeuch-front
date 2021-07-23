@@ -1,24 +1,24 @@
-import { GET_USERS, DELETE_USER, ADD_USER, GET_SINGLE_USER, UPPDATE_USER } from './actionType';
+import { GET_TASKS, DELETE_TASK, ADD_TASK, GET_SINGLE_TASK, UPPDATE_TASK } from './actionType';
 
-export const getUsers = (users) => ({
-  type: GET_USERS,
+export const getTasks = (users) => ({
+  type: GET_TASKS,
   payload: users,
 })
 
-export const userDelete = () => ({
-  type: DELETE_USER
+export const taskDelete = () => ({
+  type: DELETE_TASK
 })
 
-export const userAdded = () => ({
-  type: ADD_USER
+export const taskAdded = () => ({
+  type: ADD_TASK
 })
 
-export const userUpdated = () => ({
-  type: UPPDATE_USER
+export const taskUpdated = () => ({
+  type: UPPDATE_TASK
 })
 
-export const getUser = (user) => ({
-  type: GET_SINGLE_USER,
+export const getTask = (user) => ({
+  type: GET_SINGLE_TASK,
   payload: user
 })
 
