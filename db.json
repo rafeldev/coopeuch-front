@@ -4,19 +4,20 @@
       "name": "James Bond con edicion",
       "description": "descripcion de prueba 2 con edicion",
       "id": 3,
-      "email": "sads",
-      "contact": "sds",
-      "address": "sdsd"
+      "open": false
     },
     {
       "name": "Rafael alvarez",
       "description": "descripcion de prueba 3",
-      "id": 4
+      "id": 4,
+      "open": false
+
     },
     {
       "name": "tarea de prueba",
       "description": "descripcion prueba",
-      "id": 5
+      "id": 5,
+      "open": false
     }
   ]
 }

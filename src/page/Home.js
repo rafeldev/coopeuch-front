@@ -90,9 +90,9 @@ const Home = () => {
     setShowAddModal(!showAddModal);
   };
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const handleClick = (task) => (
+    console.log(task.open = !task.open)
+  );
   return (
     <div>
       <div className={buttonStyles.root}>
@@ -114,7 +114,7 @@ const Home = () => {
         {
           tasks && tasks.map((task) => {
             return <>
-              <ListItem button onClick={handleClick}>
+              <ListItem button onClick={(task) => handleClick(task)}>
                 <ListItemIcon>
                   <NoteIcon />
                 </ListItemIcon>
@@ -130,7 +130,7 @@ const Home = () => {
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
-              <Collapse in={open} timeout="auto" unmountOnExit>
+              <Collapse in={task.open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <ListItem button className={classeslist.nested}>
                     <ListItemIcon>
